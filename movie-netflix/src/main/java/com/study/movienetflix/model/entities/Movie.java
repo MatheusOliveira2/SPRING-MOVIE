@@ -1,7 +1,5 @@
 package com.study.movienetflix.model.entities;
 
-import java.sql.Time;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,14 +28,14 @@ public class Movie {
 
 	@NotBlank
 	@Column(nullable = false)
-	private Time duration;
+	private String duration;
 
 	public Movie() {
 		super();
 	}
 
 	public Movie(@NotBlank String name, @NotBlank String synopsis, @NotBlank String categorie,
-			@NotBlank Time duration) {
+			@NotBlank String duration) {
 		super();
 		this.name = name;
 		this.synopsis = synopsis;
@@ -77,11 +75,11 @@ public class Movie {
 		this.categorie = categorie;
 	}
 
-	public Time getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Time duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 }
