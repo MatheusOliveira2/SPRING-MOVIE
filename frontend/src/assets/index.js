@@ -1,0 +1,6 @@
+export const NetflixLogo = require('./netflix_logo.png')
+export const BlueProfile = require('./blue_profile.png')
+export const GreenProfile = require('./green_profile.png')
+export const KidsProfile = require('./kids_profile.png')
+export const RedProfile = require('./red_profile.png')
+export const YellowProfile = require('./yellow_profile.png')

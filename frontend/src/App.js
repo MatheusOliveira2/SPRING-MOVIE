@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 
+import GlobalStyle from './styles/GlobalStyle'
 import Routes from './routes/index'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
+      <GlobalStyle />
     </React.Fragment>
   );
 }
