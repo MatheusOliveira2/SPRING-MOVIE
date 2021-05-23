@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -22,9 +23,9 @@ public class Movie {
 	@Column(nullable = false)
 	private String synopsis;
 
+	@OneToOne
 	@NotBlank
-	@Column(nullable = false)
-	private String categorie;
+	private Category category;
 
 	@NotBlank
 	@Column(nullable = false)
@@ -34,12 +35,12 @@ public class Movie {
 		super();
 	}
 
-	public Movie(@NotBlank String name, @NotBlank String synopsis, @NotBlank String categorie,
+	public Movie(@NotBlank String name, @NotBlank String synopsis, @NotBlank Category category,
 			@NotBlank String duration) {
 		super();
 		this.name = name;
 		this.synopsis = synopsis;
-		this.categorie = categorie;
+		this.category = category;
 		this.duration = duration;
 	}
 
@@ -67,12 +68,12 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
-	public String getCategorie() {
-		return categorie;
+	public Category getCategorie() {
+		return category;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setCategorie(Category category) {
+		this.category = category;
 	}
 
 	public String getDuration() {

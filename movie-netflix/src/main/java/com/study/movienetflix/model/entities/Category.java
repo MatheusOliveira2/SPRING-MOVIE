@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Categorie {
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +18,11 @@ public class Categorie {
 	@Column(unique = true, nullable = false)
 	private String name;
 
-	public Categorie() {
+	public Category() {
 		super();
 	}
 
-	public Categorie(@NotBlank String name) {
+	public Category(@NotBlank String name) {
 		super();
 		this.name = name;
 	}
