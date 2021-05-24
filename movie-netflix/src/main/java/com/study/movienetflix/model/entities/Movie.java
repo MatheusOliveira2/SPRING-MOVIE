@@ -31,17 +31,38 @@ public class Movie {
 	@Column(nullable = false)
 	private String duration;
 
+	@NotBlank
+	@Column(nullable = false)
+	private String pictureURL;
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
+	}
+
 	public Movie() {
 		super();
 	}
 
 	public Movie(@NotBlank String name, @NotBlank String synopsis, @NotBlank Category category,
-			@NotBlank String duration) {
+			@NotBlank String duration, @NotBlank String pictureURL) {
 		super();
 		this.name = name;
 		this.synopsis = synopsis;
 		this.category = category;
 		this.duration = duration;
+		this.pictureURL = pictureURL;
 	}
 
 	public int getId() {
