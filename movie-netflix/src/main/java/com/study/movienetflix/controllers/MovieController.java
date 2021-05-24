@@ -13,7 +13,7 @@ import com.study.movienetflix.model.entities.Movie;
 import com.study.movienetflix.model.repositories.MovieRepository;
 
 @RestController
-@RequestMapping(path = "/")
+@RequestMapping(path = "/movie")
 public class MovieController {
 
 	@Autowired
