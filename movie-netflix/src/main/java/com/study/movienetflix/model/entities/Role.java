@@ -12,9 +12,7 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String role;
 
-    public int getId() {
-        return id;
-    }
+
     public Role() {
         super();
     }
@@ -22,6 +20,10 @@ public class Role {
     public Role(String role) {
         super();
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {

@@ -3,6 +3,7 @@ package com.study.movienetflix.model.entities;
 
 import org.hibernate.validator.constraints.Length;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -36,13 +37,14 @@ public class User {
 
     private Boolean active;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
         super();
     }
+
     public User(String userName, String email, String password, String name, String lastName, Boolean active, Set<Role> roles) {
         this.userName = userName;
         this.email = email;
@@ -109,13 +111,13 @@ public class User {
         this.active = active;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 
 
 }
