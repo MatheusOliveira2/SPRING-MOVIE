@@ -1,11 +1,6 @@
 package com.study.movienetflix.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -23,8 +18,9 @@ public class Movie {
 	@Column(nullable = false)
 	private String synopsis;
 
+
 	@OneToOne
-	@NotBlank
+	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@NotBlank
@@ -87,14 +83,6 @@ public class Movie {
 
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
-	}
-
-	public Category getCategorie() {
-		return category;
-	}
-
-	public void setCategorie(Category category) {
-		this.category = category;
 	}
 
 	public String getDuration() {
