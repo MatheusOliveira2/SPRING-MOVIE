@@ -1,5 +1,7 @@
 package com.study.movienetflix.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -19,8 +21,8 @@ public class Movie {
 	private String synopsis;
 
 
-	@OneToOne
-	@JoinColumn(name = "category_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 
 	@NotBlank
@@ -31,8 +33,8 @@ public class Movie {
 	@Column(nullable = false)
 	private String pictureURL;
 
-	public Category getCategory() {
-		return category;
+	public Integer getCategory() {
+		return category.getId();
 	}
 
 	public void setCategory(Category category) {
@@ -51,7 +53,7 @@ public class Movie {
 		super();
 	}
 
-	public Movie(@NotBlank String name, @NotBlank String synopsis, @NotBlank Category category,
+	public Movie(@NotBlank String name, @NotBlank String synopsis, Category category,
 			@NotBlank String duration, @NotBlank String pictureURL) {
 		super();
 		this.name = name;
