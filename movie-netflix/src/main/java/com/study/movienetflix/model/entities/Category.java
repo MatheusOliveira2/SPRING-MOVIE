@@ -1,10 +1,6 @@
 package com.study.movienetflix.model.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -18,15 +14,22 @@ public class Category {
 	@Column(unique = true, nullable = false)
 	private String name;
 
-	public Category() {
-		super();
-	}
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "category")
+	private Movie movie;
 
-	public Category(@NotBlank String name) {
+	public Category(@NotBlank String name, Movie movie) {
 		super();
 		this.name = name;
+		this.movie = movie;
 	}
 
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
 	public int getId() {
 		return id;
 	}
