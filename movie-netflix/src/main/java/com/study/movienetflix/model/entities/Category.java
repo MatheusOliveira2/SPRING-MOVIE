@@ -14,22 +14,16 @@ public class Category {
 	@Column(unique = true, nullable = false)
 	private String name;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "category")
-	private Movie movie;
 
-	public Category(@NotBlank String name, Movie movie) {
+	public Category(){
+		super();
+	}
+
+	public Category(@NotBlank String name) {
 		super();
 		this.name = name;
-		this.movie = movie;
 	}
 
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-
-	public Movie getMovie() {
-		return movie;
-	}
 	public int getId() {
 		return id;
 	}
