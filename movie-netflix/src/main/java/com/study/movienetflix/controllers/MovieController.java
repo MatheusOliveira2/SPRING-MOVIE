@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.movienetflix.model.entities.Movie;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/movie")
 public class MovieController {
@@ -26,8 +28,8 @@ public class MovieController {
 		return movie;
 	}
 	
-//	@GetMapping
-//	public Iterable<Movie> getMovies(){
-//		return service.findAll();
-//	}
+	@GetMapping
+	public List<MoviePostDTO> getMovies(){
+		return service.findAll();
+	}
 }
