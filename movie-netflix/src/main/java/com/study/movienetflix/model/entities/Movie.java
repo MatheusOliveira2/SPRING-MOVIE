@@ -1,10 +1,21 @@
 package com.study.movienetflix.model.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Movie {
 
@@ -33,10 +44,10 @@ public class Movie {
 	@Column(nullable = false)
 	private String pictureURL;
 
-	@NotNull
+	@CreatedDate
 	private LocalDateTime createdAt;
 
-	@NotNull
+	@LastModifiedDate
 	private LocalDateTime editedAt;
 
 	@NotNull

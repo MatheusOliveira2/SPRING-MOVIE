@@ -24,7 +24,7 @@ public class MoviePostDTO {
     private String synopsis;
 
     @NotNull
-    private Integer category;
+    private Category category;
 
     @NotBlank
     @NotNull
