@@ -1,9 +1,16 @@
 package com.study.movienetflix.model.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Category {
 
 	@Id
@@ -15,29 +22,8 @@ public class Category {
 	private String name;
 
 
-	public Category(){
-		super();
-	}
-
 	public Category(@NotBlank String name) {
 		super();
 		this.name = name;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 }
