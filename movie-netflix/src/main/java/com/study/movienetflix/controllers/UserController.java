@@ -1,9 +1,7 @@
 package com.study.movienetflix.controllers;
 
-
-import com.study.movienetflix.model.dtos.MoviePostDTO;
-import com.study.movienetflix.model.dtos.RolePostDTO;
-import com.study.movienetflix.services.RoleService;
+import com.study.movienetflix.model.dtos.UserPostDTO;
+import com.study.movienetflix.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +9,20 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/role")
-public class RoleController {
+@RequestMapping(path = "/user")
+public class UserController {
 
     @Autowired
-    RoleService service;
+    UserService service;
 
     @PostMapping
-    public RolePostDTO newRole(@RequestBody @Valid RolePostDTO role) {
+    public UserPostDTO newUser(@RequestBody @Valid UserPostDTO role) {
         service.save(role);
         return role;
     }
 
     @GetMapping
-    public List<RolePostDTO> getRoles(){
+    public List<UserPostDTO> getUsers(){
         return service.findAll();
     }
 }
