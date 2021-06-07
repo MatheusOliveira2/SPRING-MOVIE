@@ -35,10 +35,5 @@ public class CategoryController {
 	public List<CategoryPostDTO> getCategories() {
 		return this.service.findAll();
 	}
-	
-//	@DeleteMapping(path = "/{id}")
-//	@ResponseBody
-//	public void removeCategory(@PathVariable int id) {
-//		this.categoryRepository.deleteById(id);
-//	}
+
 }

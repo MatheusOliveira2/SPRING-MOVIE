@@ -13,6 +13,8 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class CategoryPostDTO {
 
+    private int id;
+
     @NotBlank
     @Column(unique = true, nullable = false)
     private String name;

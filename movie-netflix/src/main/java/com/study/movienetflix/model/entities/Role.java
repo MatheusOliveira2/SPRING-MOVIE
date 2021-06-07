@@ -1,8 +1,15 @@
 package com.study.movienetflix.model.entities;
 
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Role {
     @Id
@@ -12,29 +19,4 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String role;
 
-
-    public Role() {
-        super();
-    }
-
-    public Role(String role) {
-        super();
-        this.role = role;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 }
