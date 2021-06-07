@@ -1,6 +1,8 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
+import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.entities.Movie;
@@ -45,7 +47,7 @@ public class CategoryServiceTest {
 
     @Test
     public void findAll(){
-        List<CategoryPostDTO> list = service.findAll();
+        List<CategoryGetDTO> list = service.findAll();
         Assert.assertTrue(list.size() >= 0);
     }
 

@@ -2,6 +2,7 @@ package com.study.movienetflix.controllers;
 
 import javax.validation.Valid;
 
+import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CategoryController {
 	
 	@GetMapping
 	@ResponseBody
-	public List<CategoryPostDTO> getCategories() {
+	public List<CategoryGetDTO> getCategories() {
 		return this.service.findAll();
 	}
 

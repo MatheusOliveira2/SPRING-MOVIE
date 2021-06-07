@@ -1,5 +1,6 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.repositories.CategoryRepository;
@@ -20,15 +21,15 @@ public class CategoryService {
     private ModelMapper mapper = new ModelMapper();
 
     @Transactional
-    public CategoryPostDTO save(CategoryPostDTO dto){
+    public CategoryGetDTO save(CategoryPostDTO dto){
         Category entity = mapper.map(dto, Category.class);
-        repository.save(entity);
-        return dto;
+        Category category = repository.save(entity);
+        return mapper.map(category, CategoryGetDTO.class);
     }
 
     @Transactional(readOnly = true)
-    public List<CategoryPostDTO> findAll(){
+    public List<CategoryGetDTO> findAll(){
         List<Category> list = repository.findAll();
-        return list.stream().map(movie -> mapper.map(movie, CategoryPostDTO.class)).collect(Collectors.toList());
+        return list.stream().map(movie -> mapper.map(movie, CategoryGetDTO.class)).collect(Collectors.toList());
     }
 }

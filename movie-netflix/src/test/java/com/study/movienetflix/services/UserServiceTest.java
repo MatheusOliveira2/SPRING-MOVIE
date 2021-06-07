@@ -1,6 +1,8 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
+import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.model.entities.Role;
 import org.junit.Assert;
@@ -53,18 +55,18 @@ public class UserServiceTest {
         user.setPassword("123456798");
         user.setName("Matheus");
 
-        List<RolePostDTO> rolesDTO = roleService.findAll();
+        List<RoleGetDTO> rolesDTO = roleService.findAll();
 
         Set<Role> roles = rolesDTO.stream().map(role -> mapper.map(role, Role.class)).collect(Collectors.toSet());
         user.setRoles(roles);
-        UserPostDTO response;
+        UserGetDTO response;
         user.getRoles().stream().forEach(item -> System.out.println(item.getRole()));
         response = service.save(user);
     }
 
     @Test
     public void findAll(){
-        List<UserPostDTO> list = service.findAll();
+        List<UserGetDTO> list = service.findAll();
         Assert.assertTrue(list.size() >= 0);
     }
 }
