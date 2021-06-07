@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class RolePostDTO {
 
+    private int id;
+
     @NotBlank
     @NotNull
     private String role;
