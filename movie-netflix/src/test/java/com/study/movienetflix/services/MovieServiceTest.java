@@ -16,7 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 @SpringBootTest
-public class MovieServiceTeste {
+public class MovieServiceTest {
     ModelMapper mapper = new ModelMapper();
 
     @Autowired
