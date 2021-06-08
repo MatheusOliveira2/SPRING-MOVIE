@@ -1,6 +1,7 @@
 package com.study.movienetflix.services;
 
 import com.study.movienetflix.model.dtos.RolePostDTO;
+import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.model.entities.Role;
 import com.study.movienetflix.model.entities.User;
@@ -22,16 +23,16 @@ public class UserService {
     private final ModelMapper mapper = new ModelMapper();
 
     @Transactional
-    public UserPostDTO save(UserPostDTO dto) {
+    public UserGetDTO save(UserPostDTO dto) {
         User entity = mapper.map(dto, User.class);
-        repository.save(entity);
-        return dto;
+        User user = repository.save(entity);
+        return mapper.map(user, UserGetDTO.class);
     }
 
     @Transactional(readOnly = true)
-    public List<UserPostDTO> findAll() {
+    public List<UserGetDTO> findAll() {
         List<User> list = repository.findAll();
-        return list.stream().map(user -> mapper.map(user, UserPostDTO.class)).collect(Collectors.toList());
+        return list.stream().map(user -> mapper.map(user, UserGetDTO.class)).collect(Collectors.toList());
     }
 
 }

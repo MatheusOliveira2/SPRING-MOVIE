@@ -1,5 +1,6 @@
 package com.study.movienetflix.controllers;
 
+import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserPostDTO> getUsers(){
+    public List<UserGetDTO> getUsers(){
         return service.findAll();
     }
 }

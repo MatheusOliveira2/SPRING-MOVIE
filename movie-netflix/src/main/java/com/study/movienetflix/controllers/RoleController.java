@@ -2,6 +2,7 @@ package com.study.movienetflix.controllers;
 
 
 import com.study.movienetflix.model.dtos.MoviePostDTO;
+import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RoleController {
     }
 
     @GetMapping
-    public List<RolePostDTO> getRoles(){
+    public List<RoleGetDTO> getRoles(){
         return service.findAll();
     }
 }

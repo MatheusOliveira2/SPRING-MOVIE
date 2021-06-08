@@ -1,5 +1,6 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.model.entities.Movie;
 import com.study.movienetflix.model.repositories.MovieRepository;
@@ -22,15 +23,15 @@ public class MovieService {
 
 
     @Transactional
-    public MoviePostDTO save(MoviePostDTO dto){
+    public MovieGetDTO save(MoviePostDTO dto){
         Movie entity = mapper.map(dto, Movie.class);
-        repository.save(entity);
-        return dto;
+        Movie movie = repository.save(entity);
+        return mapper.map(movie, MovieGetDTO.class);
     }
 
     @Transactional(readOnly = true)
-    public List<MoviePostDTO> findAll(){
+    public List<MovieGetDTO> findAll(){
         List<Movie> list = repository.findAll();
-        return list.stream().map(movie -> mapper.map(movie, MoviePostDTO.class)).collect(Collectors.toList());
+        return list.stream().map(movie -> mapper.map(movie, MovieGetDTO.class)).collect(Collectors.toList());
     }
 }

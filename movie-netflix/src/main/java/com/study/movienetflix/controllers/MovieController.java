@@ -2,6 +2,7 @@ package com.study.movienetflix.controllers;
 
 import javax.validation.Valid;
 
+import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class MovieController {
 	}
 	
 	@GetMapping
-	public List<MoviePostDTO> getMovies(){
+	public List<MovieGetDTO> getMovies(){
 		return service.findAll();
 	}
 }

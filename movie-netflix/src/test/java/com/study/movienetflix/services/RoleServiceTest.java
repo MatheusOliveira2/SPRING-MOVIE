@@ -1,5 +1,6 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,14 +38,14 @@ public class RoleServiceTest {
     public void save(){
         RolePostDTO role = new RolePostDTO();
         role.setRole("UserOne");
-        RolePostDTO response;
+        RoleGetDTO response;
         response = service.save(role);
         Assert.assertTrue(response.getRole() == role.getRole());
     }
 
     @Test
     public void findAll(){
-        List<RolePostDTO> list = service.findAll();
+        List<RoleGetDTO> list = service.findAll();
         Assert.assertTrue(list.size() >= 0);
     }
 }

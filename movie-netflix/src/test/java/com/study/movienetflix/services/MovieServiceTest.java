@@ -1,5 +1,6 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.entities.Movie;
@@ -35,7 +36,7 @@ public class MovieServiceTest {
     @Test
     public void save(){
         MoviePostDTO dto = new MoviePostDTO();
-        dto.setName("nome");
+        dto.setName("nomejgjg");
         dto.setDuration("1:50");
         dto.setSynopsis("Sinopse");
         dto.setPictureURL("Foto");
@@ -50,7 +51,7 @@ public class MovieServiceTest {
 
     @Test
     public void findAll(){
-        List<MoviePostDTO> list = service.findAll();
+        List<MovieGetDTO> list = service.findAll();
         Assert.assertTrue(list.size() >= 0);
     }
 }
