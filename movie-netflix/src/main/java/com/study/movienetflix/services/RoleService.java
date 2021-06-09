@@ -17,10 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class RoleService {
 
-    @Autowired
-    RoleRepository repository;
+    private RoleRepository repository;
 
     private final ModelMapper mapper = new ModelMapper();
+
+    public RoleService(RoleRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     public RoleGetDTO save(RolePostDTO dto) {

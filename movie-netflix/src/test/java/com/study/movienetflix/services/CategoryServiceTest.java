@@ -26,16 +26,6 @@ public class CategoryServiceTest {
     @Autowired
     CategoryService service;
 
-    private MockMvc mvc;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Before
-    public void setup() throws Exception {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
-
     @Test
     public void save(){
         CategoryPostDTO dto = new CategoryPostDTO();

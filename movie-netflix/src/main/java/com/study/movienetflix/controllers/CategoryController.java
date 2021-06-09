@@ -22,9 +22,12 @@ import java.util.List;
 @RequestMapping(path = "/category")
 public class CategoryController {
 
-	@Autowired
 	private CategoryService service;
-	
+
+	public CategoryController(CategoryService service) {
+		this.service = service;
+	}
+
 	@PostMapping
 	public CategoryPostDTO newCategory(@RequestBody @Valid CategoryPostDTO category) {
 		this.service.save(category);

@@ -17,10 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     private final ModelMapper mapper = new ModelMapper();
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     public UserGetDTO save(UserPostDTO dto) {
