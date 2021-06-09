@@ -13,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/user")
 public class UserController {
 
-    @Autowired
-    UserService service;
+    private UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public UserPostDTO newUser(@RequestBody @Valid UserPostDTO role) {

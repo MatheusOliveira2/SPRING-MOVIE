@@ -16,10 +16,13 @@ import java.util.stream.Collectors;
 public class MovieService {
 
 
-    @Autowired
     private MovieRepository repository;
 
     private final ModelMapper mapper = new ModelMapper();
+
+    public MovieService(MovieRepository repository) {
+        this.repository = repository;
+    }
 
 
     @Transactional

@@ -19,9 +19,12 @@ import java.util.List;
 @RequestMapping(path = "/movie")
 public class MovieController {
 
-	@Autowired
 	private MovieService service;
-	
+
+	public MovieController(MovieService service) {
+		this.service = service;
+	}
+
 	@PostMapping
 	public MoviePostDTO newMovie(@RequestBody @Valid MoviePostDTO movie) {
 		service.save(movie);

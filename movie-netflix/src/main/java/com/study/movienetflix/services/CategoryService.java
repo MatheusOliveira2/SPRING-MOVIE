@@ -15,10 +15,13 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository repository;
+    private  CategoryRepository repository;
 
     private ModelMapper mapper = new ModelMapper();
+
+    public CategoryService(CategoryRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
     public CategoryGetDTO save(CategoryPostDTO dto){
