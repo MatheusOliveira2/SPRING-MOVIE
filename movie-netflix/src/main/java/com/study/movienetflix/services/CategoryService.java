@@ -1,15 +1,18 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.repositories.CategoryRepository;
+import com.study.movienetflix.util.MessageUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +28,14 @@ public class CategoryService {
 
     @Transactional
     public CategoryGetDTO save(CategoryPostDTO dto){
+        Optional<Category> optionalCategory = repository.findByName(dto.getName());
+        if(optionalCategory.isPresent()){
+            throw new BusinessException(MessageUtils.CATEGORY_ALREADY_EXISTS);
+        }
+
         Category entity = mapper.map(dto, Category.class);
         Category category = repository.save(entity);
+        System.out.println(category.getId());
         return mapper.map(category, CategoryGetDTO.class);
     }
 
