@@ -29,9 +29,8 @@ public class CategoryController {
 	}
 
 	@PostMapping
-	public CategoryPostDTO newCategory(@RequestBody @Valid CategoryPostDTO category) {
-		this.service.save(category);
-		return category;
+	public CategoryGetDTO newCategory(@RequestBody @Valid CategoryPostDTO category) {
+		return this.service.save(category);
 	}
 	
 	@GetMapping
