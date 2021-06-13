@@ -1,10 +1,12 @@
 package com.study.movienetflix.controllers;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
-import com.study.movienetflix.services.CategoryService;
+import com.study.movienetflix.model.dtos.RoleGetDTO;
+import com.study.movienetflix.model.dtos.RolePostDTO;
+import com.study.movienetflix.services.RoleService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,64 +20,64 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.hamcrest.Matchers.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 
-@WebMvcTest(controllers = CategoryController.class)
+@WebMvcTest(controllers = RoleController.class)
 @RunWith(SpringRunner.class)
-class CategoryControllerTest {
+class RoleControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoryService categoryService;
+    private RoleService roleService;
 
     @Autowired
     private ObjectMapper mapper;
 
     @Test
-    public void newCategorySuccess() throws Exception {
-        CategoryPostDTO dto = new CategoryPostDTO();
-        dto.setName("CategoryTeste");
-        CategoryGetDTO getDto = new CategoryGetDTO();
+    void newRoleSuccess() throws Exception {
+        RolePostDTO dto = new RolePostDTO();
+        dto.setRole("Role");
+        RoleGetDTO getDto = new RoleGetDTO();
         getDto.setId(3);
-        getDto.setName("CategoryTeste");
-        Mockito.when(categoryService.save(dto)).thenReturn(getDto);
+        getDto.setRole("Role");
+        Mockito.when(roleService.save(dto)).thenReturn(getDto);
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/category").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
+                .post("/role").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name",is(dto.getName())));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role",is(dto.getRole())));
     }
 
     @Test
-    public void newCategoryException() throws Exception {
-        CategoryPostDTO dto = new CategoryPostDTO();
-        dto.setName("");
+    void newRoleSuccessException() throws Exception {
+        RolePostDTO dto = new RolePostDTO();
+        dto.setRole("Role");
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/category").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
+                .post("/role").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",is(instanceOf(String.class))));
     }
 
     @Test
-    public void getCategoriesSuccess() throws Exception {
-        CategoryGetDTO dto = new CategoryGetDTO();
+    void getRoles() throws Exception {
+        RoleGetDTO dto = new RoleGetDTO();
         dto.setId(3);
-        dto.setName("CategoryTeste");
-        List<CategoryGetDTO> list = new ArrayList();
+        dto.setRole("Role");
+        List<RoleGetDTO> list = new ArrayList();
         list.add(dto);
-        Mockito.when(categoryService.findAll()).thenReturn(list);
+        Mockito.when(roleService.findAll()).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/category")
+                .get("/role")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].id", is(dto.getId())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name",is(dto.getName())));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].role",is(dto.getRole())));
     }
 }
