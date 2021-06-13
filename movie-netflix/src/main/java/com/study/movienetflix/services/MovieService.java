@@ -3,12 +3,10 @@ package com.study.movienetflix.services;
 import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
-import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.entities.Movie;
 import com.study.movienetflix.model.repositories.MovieRepository;
 import com.study.movienetflix.util.MessageUtils;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

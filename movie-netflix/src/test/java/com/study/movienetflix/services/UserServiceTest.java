@@ -1,7 +1,6 @@
 package com.study.movienetflix.services;
 
 import com.study.movienetflix.model.dtos.RoleGetDTO;
-import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.model.entities.Role;

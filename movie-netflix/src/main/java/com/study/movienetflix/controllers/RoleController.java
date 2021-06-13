@@ -5,8 +5,6 @@ import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.services.RoleService;
-import com.study.movienetflix.util.MessageUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
