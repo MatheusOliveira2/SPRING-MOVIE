@@ -4,7 +4,6 @@ import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 

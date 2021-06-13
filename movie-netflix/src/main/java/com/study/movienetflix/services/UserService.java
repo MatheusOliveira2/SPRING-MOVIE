@@ -1,15 +1,12 @@
 package com.study.movienetflix.services;
 
 import com.study.movienetflix.exception.BusinessException;
-import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
-import com.study.movienetflix.model.entities.Role;
 import com.study.movienetflix.model.entities.User;
 import com.study.movienetflix.model.repositories.UserRepository;
 import com.study.movienetflix.util.MessageUtils;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

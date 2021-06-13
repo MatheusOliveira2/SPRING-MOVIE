@@ -3,7 +3,6 @@ package com.study.movienetflix.services;
 import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

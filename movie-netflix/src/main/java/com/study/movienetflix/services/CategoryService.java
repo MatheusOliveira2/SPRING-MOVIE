@@ -7,7 +7,6 @@ import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.repositories.CategoryRepository;
 import com.study.movienetflix.util.MessageUtils;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +34,6 @@ public class CategoryService {
 
         Category entity = mapper.map(dto, Category.class);
         Category category = repository.save(entity);
-        System.out.println(category.getId());
         return mapper.map(category, CategoryGetDTO.class);
     }
 
