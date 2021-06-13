@@ -2,14 +2,17 @@ package com.study.movienetflix.model.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.study.movienetflix.model.entities.Category;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class MoviePostDTO {
 
     @NotEmpty(message = "*Please provide a not empty name")
@@ -18,7 +21,7 @@ public class MoviePostDTO {
     @NotEmpty(message = "*Please provide a not empty synopsis")
     private String synopsis;
 
-    @NotEmpty(message = "*Please provide a not empty category")
+    @NotNull(message = "*Please provide a not null category")
     private Category category;
 
     @NotEmpty(message = "*Please provide a not empty duration")

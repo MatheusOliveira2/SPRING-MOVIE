@@ -5,6 +5,7 @@ import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.services.RoleService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +23,15 @@ public class RoleController {
     }
 
     @PostMapping
-    public RolePostDTO newRole(@RequestBody @Valid RolePostDTO role, Errors errors) {
+    public ResponseEntity<RoleGetDTO> newRole(@RequestBody @Valid RolePostDTO role, Errors errors) {
         if(errors.hasErrors()){
             throw new BusinessException(errors.getFieldError().getDefaultMessage());
         }
-        service.save(role);
-        return role;
+        return ResponseEntity.ok(service.save(role));
     }
 
     @GetMapping
-    public List<RoleGetDTO> getRoles(){
-        return service.findAll();
+    public ResponseEntity<List<RoleGetDTO>> getRoles(){
+        return ResponseEntity.ok(service.findAll());
     }
 }

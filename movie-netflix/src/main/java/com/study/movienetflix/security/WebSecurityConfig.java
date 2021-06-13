@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/category").permitAll()
 		.antMatchers(HttpMethod.GET, "/role").permitAll()
 		.antMatchers(HttpMethod.POST, "/role").permitAll()
+		.antMatchers(HttpMethod.GET, "/user").permitAll()
+		.antMatchers(HttpMethod.POST, "/user").permitAll()
 		.anyRequest()
 		.authenticated()
 		.and().formLogin().permitAll()
