@@ -44,7 +44,7 @@ class CategoryControllerTest {
         CategoryGetDTO getDto = new CategoryGetDTO();
         getDto.setId(3);
         getDto.setName("CategoryTeste");
-        Mockito.when(categoryService.save(dto)).thenReturn(getDto);
+        Mockito.when(categoryService.save(Mockito.any(CategoryPostDTO.class))).thenReturn(getDto);
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/category").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
                 .andDo(MockMvcResultHandlers.print())

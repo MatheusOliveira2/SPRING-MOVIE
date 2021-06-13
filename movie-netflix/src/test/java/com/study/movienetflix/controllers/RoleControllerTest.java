@@ -1,9 +1,7 @@
 package com.study.movienetflix.controllers;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.model.dtos.RoleGetDTO;
 import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.services.RoleService;
@@ -46,7 +44,7 @@ class RoleControllerTest {
         RoleGetDTO getDto = new RoleGetDTO();
         getDto.setId(3);
         getDto.setRole("Role");
-        Mockito.when(roleService.save(dto)).thenReturn(getDto);
+        Mockito.when(roleService.save(Mockito.any(RolePostDTO.class))).thenReturn(getDto);
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/role").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
                 .andDo(MockMvcResultHandlers.print())
@@ -57,7 +55,7 @@ class RoleControllerTest {
     @Test
     void newRoleSuccessException() throws Exception {
         RolePostDTO dto = new RolePostDTO();
-        dto.setRole("Role");
+        dto.setRole("");
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/role").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(dto)))
                 .andDo(MockMvcResultHandlers.print())
