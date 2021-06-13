@@ -4,14 +4,10 @@ package com.study.movienetflix.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
-import com.study.movienetflix.model.dtos.RoleGetDTO;
-import com.study.movienetflix.model.dtos.RolePostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.services.MovieService;
-import com.study.movienetflix.services.RoleService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -42,7 +38,7 @@ class MovieControllerTest {
     private ObjectMapper mapper;
 
     @Test
-    void newRoleSuccess() throws Exception {
+    void newMovieSuccess() throws Exception {
         MoviePostDTO dto = new MoviePostDTO();
         dto.setDuration("duration");
         dto.setName("name");
@@ -75,7 +71,7 @@ class MovieControllerTest {
     }
 
     @Test
-    void newRoleSuccessException() throws Exception {
+    void newMovieSuccessException() throws Exception {
         MoviePostDTO dto = new MoviePostDTO();
         dto.setDuration("");
         dto.setName("name");

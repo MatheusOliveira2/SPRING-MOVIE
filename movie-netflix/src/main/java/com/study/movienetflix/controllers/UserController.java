@@ -4,6 +4,7 @@ import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
 import com.study.movienetflix.services.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,16 +22,16 @@ public class UserController {
     }
 
     @PostMapping
-    public UserPostDTO newUser(@RequestBody @Valid UserPostDTO role, Errors errors) {
+    public ResponseEntity<UserGetDTO> newUser(@RequestBody @Valid UserPostDTO role, Errors errors) {
         if(errors.hasErrors()){
             throw new BusinessException(errors.getFieldError().getDefaultMessage());
         }
-        service.save(role);
-        return role;
+
+        return ResponseEntity.ok(service.save(role));
     }
 
     @GetMapping
-    public List<UserGetDTO> getUsers(){
-        return service.findAll();
+    public ResponseEntity<List<UserGetDTO>> getUsers(){
+        return ResponseEntity.ok(service.findAll());
     }
 }
