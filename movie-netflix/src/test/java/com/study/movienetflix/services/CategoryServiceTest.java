@@ -1,40 +1,35 @@
 package com.study.movienetflix.services;
 
-import com.study.movienetflix.controllers.CategoryController;
 import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.repositories.CategoryRepository;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@WebMvcTest(controllers = CategoryService.class)
-//@RunWith(SpringRunner.class)
-@SpringBootTest
 public class CategoryServiceTest {
 
-    @Autowired
+    @InjectMocks
     private CategoryService service;
 
-    @Autowired
+    @Mock
     private CategoryRepository repository;
+
+    @BeforeEach
+    private void setup(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void save(){
