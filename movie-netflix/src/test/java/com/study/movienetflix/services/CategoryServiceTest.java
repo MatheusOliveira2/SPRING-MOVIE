@@ -1,22 +1,21 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.CategoryGetDTO;
 import com.study.movienetflix.model.dtos.CategoryPostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.repositories.CategoryRepository;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CategoryServiceTest {
 
@@ -32,7 +31,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void save(){
+    public void saveSuccess(){
         CategoryPostDTO dto = new CategoryPostDTO();
         dto.setName("CategoryTest");
         Category category = new Category();
@@ -42,6 +41,21 @@ public class CategoryServiceTest {
         CategoryGetDTO result =  service.save(dto);
         Assert.assertEquals(category.getName(), result.getName());
         Assert.assertEquals(category.getId(), result.getId());
+    }
+
+    @Test
+    public void saveAlreadyInsertedValue(){
+        CategoryPostDTO dto = new CategoryPostDTO();
+        dto.setName("CategoryTest");
+        Category category = new Category();
+        category.setId(3);
+        category.setName("CategoryTest");
+
+        Optional<Category> categoryResult = Optional.of(new Category());
+        Mockito.when(repository.findByName(Mockito.any(String.class))).thenReturn(categoryResult);
+        Assertions.assertThrows(BusinessException.class,() ->{
+            CategoryGetDTO result =  service.save(dto);
+        });
     }
 
     @Test
@@ -56,5 +70,4 @@ public class CategoryServiceTest {
         Assert.assertEquals(category.getName(), listResult.get(0).getName());
         Assert.assertEquals(category.getId(), listResult.get(0).getId());
     }
-
 }

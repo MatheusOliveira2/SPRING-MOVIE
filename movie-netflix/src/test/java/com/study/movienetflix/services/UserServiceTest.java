@@ -1,71 +1,105 @@
 package com.study.movienetflix.services;
 
-import com.study.movienetflix.model.dtos.RoleGetDTO;
+import com.study.movienetflix.exception.BusinessException;
+import com.study.movienetflix.model.dtos.MovieGetDTO;
+import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.model.dtos.UserGetDTO;
 import com.study.movienetflix.model.dtos.UserPostDTO;
+import com.study.movienetflix.model.entities.Category;
+import com.study.movienetflix.model.entities.Movie;
 import com.study.movienetflix.model.entities.Role;
+import com.study.movienetflix.model.entities.User;
+import com.study.movienetflix.model.repositories.MovieRepository;
+import com.study.movienetflix.model.repositories.UserRepository;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
 public class UserServiceTest {
 
-    ModelMapper mapper = new ModelMapper();
+    @InjectMocks
+    private UserService service;
 
-    @Autowired
-    UserService service;
+    @Mock
+    private UserRepository repository;
 
-    @Autowired
-    RoleService roleService;
-
-    private MockMvc mvc;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Before
-    public void setup() throws Exception {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    @BeforeEach
+    private void setup(){
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void save(){
-        UserPostDTO user = new UserPostDTO();
-        user.setUserName("Matheus");
-        user.setEmail("Matheus@mail.com");
-        user.setActive(true);
-        user.setLastName("Oliveira");
-        user.setPassword("123456798");
-        user.setName("Matheus");
+    public void saveSuccess(){
+        UserPostDTO dto = new UserPostDTO();
+        dto.setName("name");
+        dto.setPassword("password");
+        dto.setUserName("userName");
+        dto.setEmail("email@mail.com");
+        dto.setActive(true);
+        dto.setLastName("LastName");
+        Set<Role> rolesList = new HashSet<>();
+        rolesList.add(new Role());
+        dto.setRoles(rolesList);
+        dto.setRoles(rolesList);
+        User user = new User();
+        user.setName("name");
+        user.setPassword("password");
+        user.setUserName("userName");
+        user.setEmail("email@mail.com");
+        user.setId(5);
 
-        List<RoleGetDTO> rolesDTO = roleService.findAll();
+        Mockito.when(repository.save(Mockito.any(User.class))).thenReturn(user);
+        UserGetDTO result =  service.save(dto);
+        Assert.assertEquals(user.getName(), result.getName());
+        Assert.assertEquals(user.getId(), result.getId());
+    }
 
-        Set<Role> roles = rolesDTO.stream().map(role -> mapper.map(role, Role.class)).collect(Collectors.toSet());
-        user.setRoles(roles);
-        UserGetDTO response;
-        user.getRoles().stream().forEach(item -> System.out.println(item.getRole()));
-        response = service.save(user);
+    @Test
+    public void saveAlreadyInsertedValue(){
+        UserPostDTO dto = new UserPostDTO();
+        dto.setName("name");
+        dto.setPassword("password");
+        dto.setUserName("userName");
+        dto.setEmail("email@mail.com");
+        dto.setActive(true);
+        dto.setLastName("LastName");
+        Set<Role> rolesList = new HashSet<>();
+        rolesList.add(new Role());
+        dto.setRoles(rolesList);
+        dto.setRoles(rolesList);
+
+        Optional<User> userResult = Optional.of(new User());
+        Mockito.when(repository.findByUserName(Mockito.any(String.class))).thenReturn(userResult);
+        Assertions.assertThrows(BusinessException.class,() ->{
+            UserGetDTO result =  service.save(dto);
+        });
     }
 
     @Test
     public void findAll(){
-        List<UserGetDTO> list = service.findAll();
-        Assert.assertTrue(list.size() >= 0);
+        User user = new User();
+        user.setName("name");
+        user.setPassword("password");
+        user.setUserName("userName");
+        user.setEmail("email@mail.com");
+        user.setActive(true);
+        user.setLastName("LastName");
+        Set<Role> rolesList = new HashSet<>();
+        rolesList.add(new Role());
+        user.setRoles(rolesList);
+        user.setRoles(rolesList);
+        List<User> list = new ArrayList();
+        list.add(user);
+        Mockito.when(repository.findAll()).thenReturn(list);
+        List<UserGetDTO> listResult = service.findAll();
+        Assert.assertEquals(user.getName(), listResult.get(0).getName());
+        Assert.assertEquals(user.getId(), listResult.get(0).getId());
     }
 }

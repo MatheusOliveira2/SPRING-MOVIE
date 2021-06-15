@@ -1,57 +1,85 @@
 package com.study.movienetflix.services;
 
+import com.study.movienetflix.exception.BusinessException;
 import com.study.movienetflix.model.dtos.MovieGetDTO;
 import com.study.movienetflix.model.dtos.MoviePostDTO;
 import com.study.movienetflix.model.entities.Category;
 import com.study.movienetflix.model.entities.Movie;
+import com.study.movienetflix.model.repositories.MovieRepository;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@SpringBootTest
 public class MovieServiceTest {
-    ModelMapper mapper = new ModelMapper();
 
-    @Autowired
-    MovieService service;
+    @InjectMocks
+    private MovieService service;
 
-    private MockMvc mvc;
+    @Mock
+    private MovieRepository repository;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @Before
-    public void setup() throws Exception {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    @BeforeEach
+    private void setup(){
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void save(){
+    public void saveSuccess(){
         MoviePostDTO dto = new MoviePostDTO();
-        dto.setName("nomejgjg");
-        dto.setDuration("1:50");
-        dto.setSynopsis("Sinopse");
-        dto.setPictureURL("Foto");
+        dto.setName("name");
+        dto.setPictureURL("url");
+        dto.setSynopsis("Synopsis");
+        dto.setDuration("duration");
+        dto.setCategory(new Category());
+        Movie movie = new Movie();
+        movie.setName("name");
+        movie.setPictureURL("url");
+        movie.setSynopsis("Synopsis");
+        movie.setDuration("duration");
+        movie.setId(3);
+        Mockito.when(repository.save(Mockito.any(Movie.class))).thenReturn(movie);
+        MovieGetDTO result =  service.save(dto);
+        Assert.assertEquals(movie.getName(), result.getName());
+        Assert.assertEquals(movie.getId(), result.getId());
+    }
+
+    @Test
+    public void saveAlreadyInsertedValue(){
+        MoviePostDTO dto = new MoviePostDTO();
+        dto.setName("name");
+        dto.setPictureURL("url");
+        dto.setSynopsis("Synopsis");
+        dto.setDuration("duration");
         dto.setCategory(new Category());
 
-        Movie entity = mapper.map(dto, Movie.class);
-        Assert.assertEquals(entity.getName(), dto.getName());
-        Assert.assertEquals(entity.getDuration(), dto.getDuration());
-        Assert.assertEquals(entity.getPictureURL(), dto.getPictureURL());
-        Assert.assertEquals(entity.getCategory(), dto.getCategory());
+        Optional<Movie> movieResult = Optional.of(new Movie());
+        Mockito.when(repository.findByName(Mockito.any(String.class))).thenReturn(movieResult);
+        Assertions.assertThrows(BusinessException.class,() ->{
+            MovieGetDTO result =  service.save(dto);
+        });
     }
 
     @Test
     public void findAll(){
-        List<MovieGetDTO> list = service.findAll();
-        Assert.assertTrue(list.size() >= 0);
+        Movie movie = new Movie();
+        movie.setName("name");
+        movie.setPictureURL("url");
+        movie.setSynopsis("Synopsis");
+        movie.setDuration("duration");
+        movie.setId(3);
+        List<Movie> list = new ArrayList();
+        list.add(movie);
+        Mockito.when(repository.findAll()).thenReturn(list);
+        List<MovieGetDTO> listResult = service.findAll();
+        Assert.assertEquals(movie.getName(), listResult.get(0).getName());
+        Assert.assertEquals(movie.getId(), listResult.get(0).getId());
     }
 }
